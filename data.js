@@ -7,7 +7,7 @@ const DATA = {
     name: "Rakesh Verma",
     firstName: "Rakesh",
     lastName: "Verma",
-    tagline: "Senior Solution Architect · AWS Certified · Cloud & Mainframe Expert",
+    tagline: "Senior Solution Architect · AWS AI and Cloud Certified · Cloud & Mainframe Expert",
     headline: "18+ Years in Enterprise Technology",
     bio: "Strategic technology and business analytics leader with 18+ years of progressive experience driving $1M+ cost savings, leading teams of up to 30 members, and delivering enterprise-scale solutions across healthcare, insurance, banking, and financial services. MBA in Business Analytics complementing deep technical expertise with advanced skills in predictive modeling, data-driven strategy, and business intelligence — enabling data-backed decisions that have improved operational efficiency by up to 60%. AWS Certified Solutions Architect with a proven track record of architecting cloud-native solutions that reduced infrastructure costs by 35% and improved deployment frequency by 10×.",
     photo: "assets/Rakesh.jpeg",
