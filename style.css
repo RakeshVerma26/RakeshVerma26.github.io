@@ -123,7 +123,7 @@ nav.open .nav-toggle-icon::after { bottom: 0; transform: rotate(-45deg); }
 .hero h1 {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-  color: #fff; line-height: 1.1; margin-bottom: 0.5rem;
+  color: var(--emerald); line-height: 1.1; margin-bottom: 0.5rem;
 }
 .hero h1 .last-name { color: var(--emerald); }
 .hero-title {
