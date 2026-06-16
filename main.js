@@ -3,6 +3,9 @@
 /** Strip **bold** markdown for plain-text / PDF output. */
 function stripMd(s) { return String(s).replace(/\*\*(.*?)\*\*/g, '$1'); }
 
+/** Replace characters unsupported by jsPDF built-in fonts. */
+function pdfSafe(s) { return stripMd(s).replace(/→/g, ' > ').replace(/—/g, ' - '); }
+
 /** Resolve jsPDF constructor regardless of UMD global shape. */
 function getJsPDF() {
   const w = typeof window !== 'undefined' ? window : {};
@@ -91,20 +94,37 @@ function buildPDF() {
   heading('Summary');
   para(DATA.profile.bio);
   y += 6;
-
+  
+  // ── Photo ──
+  const photoImg = document.getElementById('hero-photo');
+  if (photoImg && photoImg.complete && photoImg.naturalWidth > 0 && !photoImg.src.includes('.svg')) {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 100; canvas.height = 100;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(photoImg, 0, 0, 100, 100);
+      const photoData = canvas.toDataURL('image/jpeg', 0.85);
+      doc.addImage(photoData, 'JPEG', pw - m - 65, m, 65, 65);
+    } catch(e) { /* skip if CORS or placeholder */ }
+  }
   // ── Key Achievements ──
   if (DATA.highlights && DATA.highlights.length) {
     heading('Key Achievements');
     DATA.highlights.forEach(h => {
-      const line = h.metric + ' — ' + h.label;
-      const lines = doc.splitTextToSize(stripMd(line), cw - 16);
-      lines.forEach((ln, i) => {
-        ensureSpace(12);
-        doc.setFont('helvetica', i === 0 ? 'bold' : 'normal').setFontSize(9.5).setTextColor(...clr.body);
-        if (i === 0) doc.text('\u2022', m + 6, y);
-        doc.text(ln, m + 16, y);
-        y += 11.5;
+      ensureSpace(24);
+      // Metric in bold accent color
+      doc.setFont('helvetica', 'bold').setFontSize(10).setTextColor(...clr.accent);
+      doc.text('\u2022', m + 6, y);
+      doc.text(stripMd(h.metric), m + 16, y);
+      y += 13;
+      // Label in normal body color
+      doc.setFont('helvetica', 'normal').setFontSize(9).setTextColor(...clr.body);
+      doc.splitTextToSize(stripMd(h.label), cw - 20).forEach(ln => {
+        ensureSpace(11);
+        doc.text(ln, m + 20, y);
+        y += 11;
       });
+      y += 4;
     });
     y += 6;
   }
@@ -118,7 +138,7 @@ function buildPDF() {
     doc.setFont('helvetica', 'normal').setFontSize(9);
     const dw = dateStr ? doc.getTextWidth(dateStr) + 12 : 0;
     doc.setFont('helvetica', 'bold').setFontSize(10.5).setTextColor(...clr.body);
-    doc.splitTextToSize(stripMd(job.title), cw - dw).forEach((ln, i) => {
+    doc.splitTextToSize(pdfsafe(job.title), cw - dw).forEach((ln, i) => {
       ensureSpace(14);
       doc.setFont('helvetica', 'bold').setFontSize(10.5).setTextColor(...clr.body);
       doc.text(ln, m, y);
@@ -180,10 +200,31 @@ function buildPDF() {
 
   // ── Certifications ──
   heading('Certifications');
-  bullets(DATA.certifications.map(c => c.title + ' \u2014 ' + c.org), 12);
-
-  const fname = (DATA.profile.cvFileName || 'Resume.pdf').trim();
-  doc.save(fname.toLowerCase().endsWith('.pdf') ? fname : fname + '.pdf');
+  const certImgSize = 28;
+  const certPromises = [];
+  DATA.certifications.forEach(c => {
+    ensureSpace(certImgSize + 8);
+    const startY = y;
+    // Try to add badge image
+    if (c.badge) {
+      try {
+        const imgEl = document.querySelector(`img[src="${c.badge}"]`);
+        if (imgEl && imgEl.complete && imgEl.naturalWidth > 0) {
+          const cvs = document.createElement('canvas');
+          cvs.width = 56; cvs.height = 56;
+          const cx = cvs.getContext('2d');
+          cx.drawImage(imgEl, 0, 0, 56, 56);
+          doc.addImage(cvs.toDataURL('image/png'), 'PNG', m + 4, y - 4, certImgSize, certImgSize);
+        }
+      } catch(e) { /* skip image */ }
+    }
+    const textX = c.badge ? m + certImgSize + 12 : m + 12;
+    doc.setFont('helvetica', 'bold').setFontSize(9.5).setTextColor(...clr.body);
+    doc.text(stripMd(c.title), textX, y + 6);
+    doc.setFont('helvetica', 'normal').setFontSize(8.5).setTextColor(...clr.muted);
+    doc.text(stripMd(c.org), textX, y + 18);
+    y = startY + certImgSize + 8;
+  });
 }
 
 /* ═══════════════════════════════════════
