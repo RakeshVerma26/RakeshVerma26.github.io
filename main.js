@@ -33,7 +33,7 @@ function buildPDF() {
   const m = 48;
   const cw = pw - m * 2;
   let y = m;
-
+  let photoAdded = false;
   const clr = { body: [30, 41, 59], muted: [71, 85, 105], accent: [5, 150, 105] };
 
   const ensureSpace = (need) => { if (y + need > ph - m) { doc.addPage(); y = m; } };
@@ -98,7 +98,7 @@ function buildPDF() {
   
   // ── Photo ──
   const photoImg = document.getElementById('hero-photo');
-  let photoAdded = false;
+  
   if (photoImg && photoImg.complete && photoImg.naturalWidth > 0 && !photoImg.src.includes('.svg')) {
     try {
       const canvas = document.createElement('canvas');
