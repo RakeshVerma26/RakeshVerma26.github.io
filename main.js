@@ -75,12 +75,12 @@ function buildPDF() {
   };
 
   // ── Header ──
-  const headerCenterX = pw / 2 - (photoAdded ? 35 : 0);
+  const headerCenterX = pw / 2 - (photoAdded ? 45 : 0);
   doc.setFont('helvetica', 'bold').setFontSize(22).setTextColor(...clr.body);
   doc.text(DATA.profile.name, headerCenterX, y, { align: 'center' });
   y += 24;
   doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(...clr.body);
-  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw - 80).forEach(ln => {
+  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw - 100).forEach(ln => {
     doc.text(ln, headerCenterX, y, { align: 'center' }); y += 12;
   });
   const contactLine = [DATA.contact.email, DATA.contact.phone].filter(Boolean).join('  \u2022  ');
@@ -98,36 +98,45 @@ function buildPDF() {
   
   // ── Photo ──
   const photoImg = document.getElementById('hero-photo');
-  
   if (photoImg && photoImg.complete && photoImg.naturalWidth > 0 && !photoImg.src.includes('.svg')) {
     try {
       const canvas = document.createElement('canvas');
-      canvas.width = 200; canvas.height = 200;
+      canvas.width = 300; canvas.height = 300;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(photoImg, 0, 0, 250, 250);
+      ctx.drawImage(photoImg, 0, 0, 300, 300);
       const photoData = canvas.toDataURL('image/png');
-      doc.addImage(photoData, 'PNG', pw - m - 70, m, 70, 70);
+      doc.addImage(photoData, 'PNG', pw - m - 75, m + 5, 75, 75);
       photoAdded = true;
     } catch(e) { /* skip if CORS or placeholder */ }
   }
-  // ── Key Achievements ──
+
+  
+    // ── Key Achievements ──
   if (DATA.highlights && DATA.highlights.length) {
     heading('Key Achievements');
     DATA.highlights.forEach(h => {
-      ensureSpace(24);
-      // Metric in bold accent color
-      doc.setFont('helvetica', 'bold').setFontSize(10).setTextColor(...clr.accent);
-      doc.text('\u2022', m + 6, y);
-      doc.text(stripMd(h.metric), m + 16, y);
-      y += 13;
-      // Label in normal body color
-      doc.setFont('helvetica', 'normal').setFontSize(9).setTextColor(...clr.body);
-      doc.splitTextToSize(stripMd(h.label), cw - 20).forEach(ln => {
-        ensureSpace(11);
-        doc.text(ln, m + 20, y);
-        y += 11;
+      const metricText = stripMd(h.metric) + '  ';
+      const labelText = stripMd(h.label);
+      const fullText = metricText + labelText;
+      const lines = doc.splitTextToSize(fullText, cw - 16);
+      lines.forEach((ln, i) => {
+        ensureSpace(12);
+        if (i === 0) {
+          // First line: bullet + metric in bold accent, then label in normal
+          doc.setFont('helvetica', 'bold').setFontSize(9.5).setTextColor(...clr.accent);
+          doc.text('\u2022', m + 6, y);
+          doc.text(metricText, m + 16, y);
+          const metricWidth = doc.getTextWidth(metricText);
+          doc.setFont('helvetica', 'normal').setFontSize(9.5).setTextColor(...clr.body);
+          const remainingText = ln.substring(metricText.length);
+          if (remainingText) doc.text(remainingText, m + 16 + metricWidth, y);
+        } else {
+          // Continuation lines in normal
+          doc.setFont('helvetica', 'normal').setFontSize(9.5).setTextColor(...clr.body);
+          doc.text(ln, m + 16, y);
+        }
+        y += 12;
       });
-      y += 4;
     });
     y += 6;
   }
