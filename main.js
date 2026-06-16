@@ -80,7 +80,7 @@ function buildPDF() {
   doc.text(DATA.profile.name, headerCenterX, y, { align: 'center' });
   y += 24;
   doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(...clr.body);
-  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw - 100).forEach(ln => {
+  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw - 120).forEach(ln => {
     doc.text(ln, headerCenterX, y, { align: 'center' }); y += 12;
   });
   const contactLine = [DATA.contact.email, DATA.contact.phone].filter(Boolean).join('  \u2022  ');
