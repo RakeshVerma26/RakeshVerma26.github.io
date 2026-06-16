@@ -75,16 +75,17 @@ function buildPDF() {
   };
 
   // ── Header ──
+  const headerCenterX = pw / 2 - (photoAdded ? 35 : 0);
   doc.setFont('helvetica', 'bold').setFontSize(22).setTextColor(...clr.body);
-  doc.text(DATA.profile.name, pw / 2, y, { align: 'center' });
+  doc.text(DATA.profile.name, headerCenterX, y, { align: 'center' });
   y += 24;
   doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(...clr.body);
-  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw).forEach(ln => {
-    doc.text(ln, pw / 2, y, { align: 'center' }); y += 12;
+  doc.splitTextToSize(stripMd(DATA.profile.tagline), cw - 80).forEach(ln => {
+    doc.text(ln, headerCenterX, y, { align: 'center' }); y += 12;
   });
   const contactLine = [DATA.contact.email, DATA.contact.phone].filter(Boolean).join('  \u2022  ');
   doc.setFontSize(9).setTextColor(...clr.muted);
-  doc.text(contactLine, pw / 2, y, { align: 'center' });
+  doc.text(contactLine, headerCenterX, y, { align: 'center' });
   y += 18;
   doc.setDrawColor(200, 200, 205).setLineWidth(0.35);
   doc.line(m + cw * 0.1, y, m + cw * 0.9, y);
@@ -97,14 +98,16 @@ function buildPDF() {
   
   // ── Photo ──
   const photoImg = document.getElementById('hero-photo');
+  let photoAdded = false;
   if (photoImg && photoImg.complete && photoImg.naturalWidth > 0 && !photoImg.src.includes('.svg')) {
     try {
       const canvas = document.createElement('canvas');
-      canvas.width = 100; canvas.height = 100;
+      canvas.width = 200; canvas.height = 200;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(photoImg, 0, 0, 100, 100);
-      const photoData = canvas.toDataURL('image/jpeg', 0.85);
-      doc.addImage(photoData, 'JPEG', pw - m - 65, m, 65, 65);
+      ctx.drawImage(photoImg, 0, 0, 250, 250);
+      const photoData = canvas.toDataURL('image/png');
+      doc.addImage(photoData, 'PNG', pw - m - 70, m, 70, 70);
+      photoAdded = true;
     } catch(e) { /* skip if CORS or placeholder */ }
   }
   // ── Key Achievements ──
