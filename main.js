@@ -138,7 +138,7 @@ function buildPDF() {
     doc.setFont('helvetica', 'normal').setFontSize(9);
     const dw = dateStr ? doc.getTextWidth(dateStr) + 12 : 0;
     doc.setFont('helvetica', 'bold').setFontSize(10.5).setTextColor(...clr.body);
-    doc.splitTextToSize(pdfsafe(job.title), cw - dw).forEach((ln, i) => {
+    doc.splitTextToSize(pdfSafe(job.title), cw - dw).forEach((ln, i) => {
       ensureSpace(14);
       doc.setFont('helvetica', 'bold').setFontSize(10.5).setTextColor(...clr.body);
       doc.text(ln, m, y);
