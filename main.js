@@ -225,6 +225,8 @@ function buildPDF() {
     doc.text(stripMd(c.org), textX, y + 18);
     y = startY + certImgSize + 8;
   });
+  const fname = (DATA.profile.cvFileName || 'Resume.pdf').trim();
+  doc.save(fname.toLowerCase().endsWith('.pdf') ? fname : fname + '.pdf');
 }
 
 /* ═══════════════════════════════════════
