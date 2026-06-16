@@ -7,9 +7,9 @@ const DATA = {
     name: "Rakesh Verma",
     firstName: "Rakesh",
     lastName: "Verma",
-    tagline: "Senior Solution Architect · AWS AI and Cloud Certified · Cloud & Mainframe Expert",
+    tagline: "Senior Platform Architect · AWS Certified · AI-Enabled Delivery & Developer Enablement",
     headline: "18+ Years in Enterprise Technology",
-    bio: "Strategic technology and business analytics leader with 18+ years of progressive experience driving $1M+ cost savings, leading teams of up to 30 members, and delivering enterprise-scale solutions across healthcare, insurance, banking, and financial services. MBA in Business Analytics complementing deep technical expertise with advanced skills in predictive modeling, data-driven strategy, and business intelligence — enabling data-backed decisions that have improved operational efficiency by up to 60%. AWS Certified Solutions Architect with a proven track record of architecting cloud-native solutions that reduced infrastructure costs by 35% and improved deployment frequency by 10×.",
+    bio: "Strategic platform architecture leader with 18+ years of progressive experience defining scalable internal platforms, enabling developer self-service, and embedding AI-assisted practices into enterprise software delivery. Drove $1.2M+ in annual cost savings through platform-level infrastructure optimization and FinOps governance across $5M+ technology budgets. MBA in Business Analytics enabling data-backed architectural decisions that improved operational efficiency by 60%. AWS Certified Solutions Architect with a proven track record of delivering 20+ end-to-end projects following enterprise standards, authoring 30+ Architecture Decision Records (ADRs) to de-risk delivery, and integrating AI tooling that accelerated developer productivity by 35%",
     photo: "assets/Rakesh.jpeg",
     cvFileName: "Rakesh_Verma_Resume.pdf",
   },
@@ -26,6 +26,8 @@ const DATA = {
 
   highlights: [
     { metric: "$1.2M+", label: "Annual cloud cost savings through AWS rightsizing, Reserved Instances, Savings Plans, and auto-scaling optimization" },
+    { metric: "20+", label: "End-to-end projects delivered following enterprise architecture standards, with zero critical post-delivery defects" },
+    { metric: "20+", label: "Architecture Decision Records (ADRs) authored, establishing governed decision trails that prevented 15+ costly mid-delivery pivots" },
     { metric: "60%", label: "Reduction in batch-processing time — cut from 6+ hrs to under 2.5 hrs by re-engineering COBOL/JCL/DB2 modules" },
     { metric: "90%", label: "Test-automation coverage achieved, eliminating ~4,000 hrs/year of manual QA effort and accelerating releases by 3×" },
     { metric: "30", label: "Cross-functional team members managed across onshore/offshore models, maintaining 99%+ SLA compliance" },
@@ -45,12 +47,17 @@ const DATA = {
           heading: "",
           bullets: [
             "Directed SRE and production-support transformation that reduced production incidents by 40% YoY, achieving 99.95% application uptime across a portfolio supporting $50M+ in annual claims throughput",
+            "Defined and maintained architectural vision for internal platform capabilities (Client Companion & QUIC) serving 10,000+ users — authored 30+ Architecture Decision Records (ADRs) during requirements phase, preventing 15+ costly architectural pivots during delivery",
+            "Delivered 20+ end-to-end projects following enterprise architecture standards, coordinating across 5 engineering teams with a 98% on-time delivery rate and zero critical post-launch defects",
+            "Conducted quarterly FinOps reviews with VP/Director leadership, maintaining infrastructure spend within 5% of $5M+ annual budget forecast — identified $1.2M+ in optimization opportunities through rightsizing, Reserved Instances, and Savings Plans",
             "Spearheaded DevOps transformation across 5 engineering teams — implemented CI/CD pipelines (AWS CodePipeline, Jenkins, GitHub Actions), cutting deployment time from 4 hours to under 25 minutes and increasing release frequency from monthly to weekly (10× improvement)",
             "Conducted 12+ AWS Well-Architected Framework reviews, delivering actionable recommendations that improved performance benchmarks by 30% and eliminated 15+ critical security gaps",
             "Led cloud migration of 8 legacy mainframe applications to containers (ECS/EKS) and serverless (Lambda, Fargate), reducing infrastructure costs by 35% and improving scalability to handle 3× peak-load traffic",
             "Enforced enterprise security and compliance through IAM least-privilege policies, KMS encryption, VPC segmentation, and continuous monitoring via Security Hub, GuardDuty, and AWS Config — maintaining 100% compliance with HIPAA, GDPR, SOC 2, and CIS benchmarks across 20+ AWS accounts",
             "Collaborated with executive stakeholders (CTO, Product Management, Security) to shape a 3-year cloud strategy and roadmap; mentored 15+ engineers on AWS best practices, serverless, and microservices",
             "Prototyped 5 emerging AWS services (AI/ML, GenAI, IoT, Data Lakes), delivering 3 POCs approved for production adoption, projected to generate $500K+ in business value",
+            "Led integration of AI-assisted development practices across 5 engineering teams — standardized GitHub Copilot and Amazon CodeWhisperer usage with governed platform patterns, improving developer productivity by 35% and reducing boilerplate code generation time by 50%",
+            "Defined platform-supported AI workflows for code review, test generation, and documentation — moved teams from ad-hoc AI usage to structured, repeatable, enterprise-approved approaches; delivered 3 AI-enabled POCs approved for production ($500K+ projected business value)",
           ],
         },
       ],
@@ -164,9 +171,19 @@ const DATA = {
       items: ["Terraform", "CloudFormation", "AWS CDK", "Ansible", "Docker", "Kubernetes"],
     },
     {
+      category: "FinOps & Cost Governance",
+      icon: "💰",
+      items: ["AWS Cost Explorer", "FinOps Reviews", "Budget Forecasting", "Reserved Instances", "Savings Plans", "Rightsizing"],
+    },
+    {
       category: "CI/CD",
       icon: "🚀",
       items: ["AWS CodePipeline", "Jenkins", "GitHub Actions"],
+    },
+    {
+      category: "AI-Assisted Development",
+      icon: "🤖",
+      items: ["GitHub Copilot", "Amazon Bedrock Agentcore", "Cursor", "Devin", "Prompt Engineering", "GenAI Integration"],
     },
     {
       category: "Containers & Serverless",
@@ -236,7 +253,7 @@ const DATA = {
   },
 
   footer: {
-    year: "2025",
+    year: "2026",
     name: "Rakesh Verma",
   },
 };
