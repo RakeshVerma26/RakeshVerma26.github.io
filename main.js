@@ -201,7 +201,7 @@ function buildPDF() {
   // ── Certifications ──
   heading('Certifications');
   const certImgSize = 28;
-  const certPromises = [];
+  //const certPromises = [];
   DATA.certifications.forEach(c => {
     ensureSpace(certImgSize + 8);
     const startY = y;
