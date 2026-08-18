@@ -29,6 +29,7 @@ const DATA = {
     { metric: "20+", label: "End-to-end projects delivered following enterprise architecture standards, with zero critical post-delivery defects" },
     { metric: "20+", label: "Architecture Decision Records (ADRs) authored, establishing governed decision trails that prevented 15+ costly mid-delivery pivots" },
     { metric: "60%", label: "Reduction in batch-processing time — cut from 6+ hrs to under 2.5 hrs by re-engineering COBOL/JCL/DB2 modules" },
+    { metric: "60%", label: "Reduced dashboard data latency by 60% through optimized Databricks transformations and workflow orchestration." },
 
     { metric: "90%", label: "Test-automation coverage achieved, eliminating ~4,000 hrs/year of manual QA effort and accelerating releases by 3×" },
     { metric: "30", label: "Cross-functional team members managed across onshore/offshore models, maintaining 99%+ SLA compliance" },
@@ -52,6 +53,12 @@ const DATA = {
             "Delivered 20+ end-to-end projects following enterprise architecture standards, coordinating across 5 engineering teams with a 98% on-time delivery rate and zero critical post-launch defects",
             "Conducted quarterly FinOps reviews with VP/Director leadership, maintaining infrastructure spend within 5% of $5M+ annual budget forecast — identified $1.2M+ in optimization opportunities through rightsizing, Reserved Instances, and Savings Plans",
             "Spearheaded DevOps transformation across 5 engineering teams — implemented CI/CD pipelines (AWS CodePipeline, Jenkins, GitHub Actions), cutting deployment time from 4 hours to under 25 minutes and increasing release frequency from monthly to weekly (10× improvement)",
+             "Architected and delivered an end-to-end analytics platform on Databricks, enabling executive and operational dashboards powered by near real-time curated data assets",
+             "Designed Medallion architecture (Bronze/Silver/Gold) on Delta Lake to standardize ingestion, cleansing, transformation, and KPI-ready serving layers for dashboard consumption",
+             "Implemented automated Databricks deployment pipelines using GitHub Actions with branch-based promotion, release gates, and environment-specific rollout across dev, QA, and prod",
+             "Built scalable Databricks notebook and workflow orchestration with parameterized jobs, dependency controls, and failure-retry handling, improving pipeline reliability and SLA adherence",
+             "Integrated data quality and reconciliation controls (schema validation, null thresholds, duplicate checks, and row-count balancing), reducing downstream reporting defects and improving trust in analytics outputs",
+             "Optimized Delta tables through partitioning, compaction, and query tuning, reducing dashboard data latency by 60% and improving analytics responsiveness for business users",
 
 
 
@@ -66,11 +73,14 @@ const DATA = {
             "Led integration of AI-assisted development practices across 5 engineering teams — standardized GitHub Copilot and Amazon CodeWhisperer usage with governed platform patterns, improving developer productivity by 35% and reducing boilerplate code generation time by 50%",
             "Defined platform-supported AI workflows for code review, test generation, and documentation — moved teams from ad-hoc AI usage to structured, repeatable, enterprise-approved approaches; delivered 3 AI-enabled POCs approved for production ($500K+ projected business value)",
 
-
-
-
-
-
+          ],
+        },
+        {
+          heading: "Databricks End-to-End Delivery",
+          bullets: [
+            "Defined and implemented end-to-end flow: source ingestion -> Bronze raw layer -> Silver conformed layer -> Gold business marts -> BI dashboard serving with scheduled refresh and SLA monitoring",
+            "Established CI/CD flow for Databricks assets: pull-request validation -> notebook/workflow checks -> automated deployment via GitHub Actions -> post-deploy smoke tests -> controlled production promotion",
+            "Standardized reusable KPI logic and governed metric definitions, enabling consistent cross-functional reporting through certified data products",
           ],
         },
       ],
@@ -216,12 +226,12 @@ const DATA = {
     {
       category: "Analytics & BI",
       icon: "📈",
-      items: ["Python (Pandas, NumPy)", "SQL", "SAS", "IBM Cognos BI", "Oracle APEX", "Oracle Toad"],
-
-
-
-
-
+      items: ["Python (Pandas, NumPy)", "SQL", "Databricks SQL", "SAS", "IBM Cognos BI", "Oracle APEX", "Oracle Toad"],
+    },
+    {
+      category: "Databricks & Data Engineering",
+      icon: "🧱",
+      items: ["Databricks Workflows", "Delta Lake", "Unity Catalog", "Delta Live Tables", "Notebook Jobs", "Medallion Architecture", "ETL/ELT Orchestration", "Data Quality Validation", "Schema Evolution", "Incremental Processing", "GitHub Actions for Databricks CI/CD"],
     },
     {
       category: "Databases",
